@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, Text } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -15,14 +15,14 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+      <ThemedView>
+        <ThemedText type="title" className="text-red-600 text-sm bg-green-500">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
+          Edit <ThemedText className='' type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
           Press{' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
@@ -41,7 +41,8 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+        <ThemedText type="subtitle" className='text-3xl bg-green-900'>Step 3: Get a fresh start</ThemedText>
+        <Text>HI</Text>
         <ThemedText>
           When you're ready, run{' '}
           <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
@@ -50,6 +51,8 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+
+      <Text className='text-red-400'>SENU</Text>
     </ParallaxScrollView>
   );
 }
