@@ -4,6 +4,7 @@ export default function Tab() {
   return (
     <View style={styles.container}>
       <Text>Tab [Home|Settings]</Text>
+      <Text className="text-3xl bg-red-300">Senidu</Text>
     </View>
   );
 }
