@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import { AVPlaybackStatus, AVPlaybackStatusSuccess, ResizeMode, Video } from "expo-av";
 import * as Animatable from "react-native-animatable";
 import {
   FlatList,
@@ -8,9 +7,11 @@ import {
   TouchableOpacity,
   ListRenderItem,
   ViewToken,
+  StyleSheet,
 } from "react-native";
 
 import { icons } from "../constants";
+import Video from "./Video";
 
 // Define the type for a single post item
 interface Post {
@@ -55,15 +56,15 @@ const TrendingItem: React.FC<TrendingItemProps> = ({
   const isActive = activeItem === item.$id;
   const [play, setPlay] = useState(false);
 
-  const handlePlaybackStatusUpdate = (status: AVPlaybackStatus) => {
-    if (
-      status.isLoaded && // Check if the video is loaded
-      "didJustFinish" in status && // Ensure it's a success status
-      (status as AVPlaybackStatusSuccess).didJustFinish
-    ) {
-      setPlay(false);
-    }
-  };
+  // const handlePlaybackStatusUpdate = (status: AVPlaybackStatus) => {
+  //   if (
+  //     status.isLoaded && // Check if the video is loaded
+  //     "didJustFinish" in status && // Ensure it's a success status
+  //     (status as AVPlaybackStatusSuccess).didJustFinish
+  //   ) {
+  //     setPlay(false);
+  //   }
+  // };
 
   return (
     <Animatable.View
@@ -72,14 +73,18 @@ const TrendingItem: React.FC<TrendingItemProps> = ({
       duration={500}
     >
       {play ? (
-        <Video
-          source={{ uri: item.video }}
-          className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay={isActive}
-          onPlaybackStatusUpdate={handlePlaybackStatusUpdate}
-        />
+        <>
+          {/* <Video
+            source={{ uri: item.video }}
+            className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
+            resizeMode={ResizeMode.CONTAIN}
+            useNativeControls
+            shouldPlay={isActive}
+            onPlaybackStatusUpdate={handlePlaybackStatusUpdate}
+          /> */}
+
+          <Video styles={styles.video} videoSource={item.video} />
+        </>
       ) : (
         <TouchableOpacity
           className="relative flex justify-center items-center"
@@ -93,6 +98,10 @@ const TrendingItem: React.FC<TrendingItemProps> = ({
             source={{ uri: item.thumbnail }}
             className="w-52 h-72 rounded-[33px] my-5 overflow-hidden shadow-lg shadow-black/40"
             resizeMode="cover"
+            style={{
+              width: 208,
+              height: 288,
+            }}
           />
           <Image
             source={icons.play}
@@ -151,3 +160,12 @@ const Trending: React.FC<TrendingProps> = ({ posts }) => {
 };
 
 export default Trending;
+
+const styles = StyleSheet.create({
+  video: {
+    width: 208,
+    height: 288,
+    borderRadius: 33,
+    marginTop: 20
+  },
+});

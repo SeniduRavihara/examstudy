@@ -1,9 +1,58 @@
-import { View, Text } from 'react-native'
-const Bookmark = () => {
+import { useEvent } from "expo";
+import { useVideoPlayer, VideoView } from "expo-video";
+import { StyleSheet, View, Button } from "react-native";
+
+const videoSource =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+export default function VideoScreen() {
+  const player = useVideoPlayer(videoSource, (player) => {
+    player.loop = true;
+    player.play();
+  });
+
+  const { isPlaying } = useEvent(player, "playingChange", {
+    isPlaying: player.playing,
+  });
+
   return (
-    <View>
-      <Text>Bookmark</Text>
+    <View style={styles.contentContainer}>
+      <VideoView
+        style={styles.video}
+        player={player}
+        allowsFullscreen
+        allowsPictureInPicture
+        contentFit="cover"
+      />
+      <View style={styles.controlsContainer}>
+        <Button
+          title={isPlaying ? "Pause" : "Play"}
+          onPress={() => {
+            if (isPlaying) {
+              player.pause();
+            } else {
+              player.play();
+            }
+          }}
+        />
+      </View>
     </View>
-  )
+  );
 }
-export default Bookmark
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 50,
+  },
+  video: {
+    width: 350,
+    height: 500,
+  },
+  controlsContainer: {
+    padding: 10,
+  },
+});

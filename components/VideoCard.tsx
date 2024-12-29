@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ResizeMode, Video } from "expo-av";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { icons } from "../constants";
+import Video from "./Video";
+import React from "react";
 
 const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
   const [play, setPlay] = useState(false);
@@ -59,18 +59,21 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
       </View>
 
       {play ? (
-        <Video
-          source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
+        <>
+          {/* <Video
+            source={{ uri: video }}
+            className="w-full h-60 rounded-xl mt-3"
+            resizeMode={ResizeMode.CONTAIN}
+            useNativeControls
+            shouldPlay
+            onPlaybackStatusUpdate={(status) => {
+              if (status.didJustFinish) {
+                setPlay(false);
+              }
+            }}
+          /> */}
+          <Video styles={styles.video} videoSource={video} />
+        </>
       ) : (
         <TouchableOpacity
           activeOpacity={0.7}
@@ -95,3 +98,13 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
 };
 
 export default VideoCard;
+
+
+const styles = StyleSheet.create({
+  video: {
+    width: '100%',
+    height: 240,
+    borderRadius: 12,
+    marginTop: 20
+  },
+});
