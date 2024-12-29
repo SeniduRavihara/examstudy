@@ -16,7 +16,8 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView>
-        <ThemedText type="title" className="text-red-600 text-sm bg-green-500">Welcome!</ThemedText>
+        <ThemedText type="title" className="text-white text-sm bg-green-500">Welcome!</ThemedText>
+        <Text className='text-red-300'>HELLO</Text>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
@@ -52,7 +53,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
 
-      <Text className='text-red-400'>SENU</Text>
+      <Text className='text-blue-400'>SENU RAVI</Text>
     </ParallaxScrollView>
   );
 }
