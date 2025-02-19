@@ -15,6 +15,7 @@ import useAppwrite from "../../lib/useAppwrite";
 import { getAllPosts, getLatestPosts, signOut } from "../../lib/appwrite";
 import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
 import { router } from "expo-router";
+import Post from "@/components/Post";
 
 const Home: React.FC = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
@@ -37,9 +38,8 @@ const Home: React.FC = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard
+          <Post
             title={item.title}
-            thumbnail={item.thumbnail}
             video={item.video}
             creator={item.creator.username}
             avatar={item.creator.avatar}

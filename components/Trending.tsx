@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from "react";
-import * as Animatable from "react-native-animatable";
 import {
   FlatList,
   Image,
   ImageBackground,
-  TouchableOpacity,
   ListRenderItem,
-  ViewToken,
   StyleSheet,
+  TouchableOpacity,
+  ViewToken,
 } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 import { icons } from "../constants";
 import Video from "./Video";
@@ -155,6 +155,7 @@ const Trending: React.FC<TrendingProps> = ({ posts }) => {
       onViewableItemsChanged={viewableItemsChanged}
       viewabilityConfig={viewabilityConfig}
       contentContainerStyle={{ paddingHorizontal: 170 }}
+      style={{ scrollbarWidth : "none" }}
     />
   );
 };
@@ -166,6 +167,6 @@ const styles = StyleSheet.create({
     width: 208,
     height: 288,
     borderRadius: 33,
-    marginTop: 20
+    marginTop: 20,
   },
 });

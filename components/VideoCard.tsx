@@ -1,10 +1,17 @@
-import { useState } from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
 import Video from "./Video";
-import React from "react";
 
-const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
+interface VideoCardProps {
+  title: string;
+  creator: string;
+  avatar: string;
+  thumbnail: string;
+  video: string;
+}
+
+const VideoCard: React.FC<VideoCardProps> = ({ title, creator, avatar, thumbnail, video }) => {
   const [play, setPlay] = useState(false);
 
   return (
@@ -99,12 +106,11 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
 
 export default VideoCard;
 
-
 const styles = StyleSheet.create({
   video: {
-    width: '100%',
+    width: "100%",
     height: 240,
     borderRadius: 12,
-    marginTop: 20
+    marginTop: 20,
   },
 });
